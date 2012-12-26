@@ -1,8 +1,9 @@
 package cukepresentation;
 
+import cucumber.annotation.After;
+import cucumber.annotation.Before;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
-import cucumber.runtime.PendingException;
 import junit.framework.Assert;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -22,6 +23,19 @@ public class StepDefinitions {
     HttpResponse response;
     String body;
 
+    HelloWorldWebServer webServer;
+
+    @Before()
+    public void startServer() throws IOException {
+        this.webServer = new HelloWorldWebServer(8080);
+        this.webServer.start();
+    }
+
+    @After()
+    public void stopServer() {
+        this.webServer.stop();
+    }
+
     @When("^a request is made to \"([^\"]*)\"$")
     public void a_request_is_made_to(String arg1) throws Throwable {
         HttpClient httpclient = new DefaultHttpClient();
@@ -33,8 +47,6 @@ public class StepDefinitions {
 
         HttpGet httpget = new HttpGet(uri);
         response = httpclient.execute(httpget);
-
-        httpclient.execute(httpget);
     }
 
     @Then("^the response body should be \"([^\"]*)\"$")
@@ -43,7 +55,6 @@ public class StepDefinitions {
     }
 
     /**
-     *
      * Use this method to make sure we read the body only once
      *
      * @return the response body
