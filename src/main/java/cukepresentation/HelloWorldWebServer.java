@@ -19,7 +19,7 @@ public class HelloWorldWebServer {
 
     public void start() throws IOException {
         server = HttpServer.create(new InetSocketAddress(this.port), 0);
-        server.createContext("/hello_world", new HelloWorldHandler());
+        server.createContext("/hello", new HelloWorldHandler());
         server.setExecutor(null);
         server.start();
     }
