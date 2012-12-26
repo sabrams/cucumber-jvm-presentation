@@ -12,6 +12,7 @@
         <junit.version>4.10</junit.version>
         <cucumber.version>1.0.11</cucumber.version>
         <apache.httpcomponents.version>4.0.1</apache.httpcomponents.version>
+        <easymock.version>3.1</easymock.version>
     </properties>
     <dependencies>
         <!-- JUnit for IDE and Maven execution of Cucumber-JVM -->
@@ -54,6 +55,13 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>${apache.httpcomponents.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easymock.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
