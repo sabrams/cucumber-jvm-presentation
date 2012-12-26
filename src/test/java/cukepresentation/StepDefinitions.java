@@ -64,12 +64,17 @@ public class StepDefinitions {
             return this.body;
         this.body = "";
         try {
+            boolean isFirstLine = true;
             String line;
             InputStream is = response.getEntity().getContent();
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(is));
-            while ((line = bufferedReader.readLine()) != null)
-                body = body + line + System.getProperty("line.separator");
+            while ((line = bufferedReader.readLine()) != null) {
+                if (!isFirstLine)
+                    body = body + System.getProperty("line.separator");
+                body = body + line;
+                isFirstLine = false;
+            }
         } catch (IOException e) {
             throw new RuntimeException("Failure while attempting to read HTTP response body", e);
         }

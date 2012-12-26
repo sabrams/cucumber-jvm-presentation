@@ -14,7 +14,7 @@ public class HelloWorldHandlerTest {
     @Test
     public void testHandle() throws Exception {
 
-        String expectedResponse = "Hello World!";
+        String expectedResponse = "Hello, World!";
 
         HelloWorldHandler handlerUnderTest = new HelloWorldHandler();
         HttpExchange mockExchange = EasyMock.createMock(HttpExchange.class);
