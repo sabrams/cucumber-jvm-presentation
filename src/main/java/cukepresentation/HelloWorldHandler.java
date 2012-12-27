@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class HelloWorldHandler implements HttpHandler {
 
-    private static final String helloWorldStr = "Hello World!";
+    private static final String helloWorldStr = "Hello, World!";
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
