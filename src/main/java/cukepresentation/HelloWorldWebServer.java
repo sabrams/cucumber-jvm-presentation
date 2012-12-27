@@ -12,7 +12,7 @@ public class HelloWorldWebServer {
 
     public void start() throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8086), 0);
-        server.createContext("/hello_world", new HelloWorldHandler());
+        server.createContext("/hello", new HelloWorldHandler());
         server.setExecutor(null);
         server.start();
     }
