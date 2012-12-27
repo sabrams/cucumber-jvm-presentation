@@ -11,8 +11,17 @@
     <properties>
         <junit.version>4.10</junit.version>
         <cucumber.version>1.0.11</cucumber.version>
+        <jython.version>2.5.3</jython.version>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>org.python</groupId>
+            <artifactId>jython-standalone</artifactId>
+            <version>${jython.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- JUnit for IDE and Maven execution of Cucumber-JVM -->
         <dependency>
             <groupId>junit</groupId>
@@ -31,6 +40,13 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-jython</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
