@@ -1,9 +1,12 @@
 package cukepresentation;
 
+import com.google.inject.Inject;
+import com.sun.net.httpserver.HttpServer;
 import cucumber.annotation.After;
 import cucumber.annotation.Before;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
+import cukepresentation.guice.Port;
 import junit.framework.Assert;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -23,17 +26,23 @@ public class StepDefinitions {
     HttpResponse response;
     String body;
 
-    HelloWorldWebServer webServer;
+    Integer port;
+    HttpServer webServer;
+
+    @Inject
+    public StepDefinitions(HttpServer webServer, @Port Integer port) {
+        this.webServer = webServer;
+        this.port = port;
+    }
 
     @Before()
     public void startServer() throws IOException {
-        this.webServer = new HelloWorldWebServer(8080);
         this.webServer.start();
     }
 
     @After()
     public void stopServer() {
-        this.webServer.stop();
+        this.webServer.stop(0);
     }
 
     @When("^a request is made to \"([^\"]*)\"$")
@@ -41,7 +50,7 @@ public class StepDefinitions {
         HttpClient httpclient = new DefaultHttpClient();
         String uri;
         if (arg1.startsWith("/"))
-            uri = "http://localhost:8080" + arg1;
+            uri = "http://localhost:" + port + arg1;
         else
             uri = arg1;
 
