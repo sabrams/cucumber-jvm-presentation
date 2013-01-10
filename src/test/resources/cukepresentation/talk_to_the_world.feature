@@ -4,5 +4,10 @@ I want to create a web application that "talks to the world"
 so that I can present a Cucumber example
 
   Scenario: "GET" request made to /hello
-    When a request is made to "/hello"
+    When a GET request is made to "/hello"
     Then the response body should be "Hello, World!"
+
+  Scenario: visit /hello on a browser
+    When I use a web browser to open "/hello"
+    Then I should see "Hello, World!"
+
