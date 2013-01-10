@@ -43,4 +43,14 @@ public class WebBrowserStepDefs {
         Assert.assertTrue(webDriver.getPageSource().contains(expectedContent));
     }
 
+    @After(value = "@CaptureScreenShot")
+    public void embedScreenshot(ScenarioResult scenario) {
+        try {
+            byte[] screenshot = webDriver.getScreenshotAs(OutputType.BYTES);
+            InputStream is = new ByteArrayInputStream(screenshot);
+            scenario.embed(is, "image/png");
+        } catch (WebDriverException somePlatformsDontSupportScreenshots) {
+            System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+        }
+    }
 }

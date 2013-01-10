@@ -7,6 +7,7 @@ so that I can present a Cucumber example
     When a GET request is made to "/hello"
     Then the response body should be "Hello, World!"
 
+  @CaptureScreenShot
   Scenario: visit /hello on a browser
     When I use a web browser to open "/hello"
     Then I should see "Hello, World!"
