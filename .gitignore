@@ -1,3 +1,6 @@
 .idea/
 cucumber-presentation.iml
 target/
+chromedriver.log
+src/test/java/.DS_Store
+.DS_Store
