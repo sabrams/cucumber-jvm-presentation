@@ -14,7 +14,9 @@
         <apache.httpcomponents.version>4.0.1</apache.httpcomponents.version>
         <easymock.version>3.1</easymock.version>
         <guice.version>3.0</guice.version>
-    </properties>
+        <seleniumhq.version>2.5.0</seleniumhq.version>
+        </properties>
+
     <dependencies>
 
         <dependency>
@@ -93,5 +95,14 @@
             <version>${easymock.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${seleniumhq.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
+
 </project>

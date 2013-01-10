@@ -1,9 +1,6 @@
 package cukepresentation;
 
 import com.google.inject.Inject;
-import com.sun.net.httpserver.HttpServer;
-import cucumber.annotation.After;
-import cucumber.annotation.Before;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cukepresentation.guice.Port;
@@ -13,10 +10,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * @author: Stephen Abrams
@@ -27,26 +21,14 @@ public class StepDefinitions {
     String body;
 
     Integer port;
-    HttpServer webServer;
 
     @Inject
-    public StepDefinitions(HttpServer webServer, @Port Integer port) {
-        this.webServer = webServer;
+    public StepDefinitions(@Port Integer port) {
         this.port = port;
     }
 
-    @Before()
-    public void startServer() throws IOException {
-        this.webServer.start();
-    }
-
-    @After()
-    public void stopServer() {
-        this.webServer.stop(0);
-    }
-
-    @When("^a request is made to \"([^\"]*)\"$")
-    public void a_request_is_made_to(String arg1) throws Throwable {
+    @When("^a GET request is made to \"([^\"]*)\"$")
+    public void a_get_request_is_made_to(String arg1) throws Throwable {
         HttpClient httpclient = new DefaultHttpClient();
         String uri;
         if (arg1.startsWith("/"))
@@ -61,6 +43,7 @@ public class StepDefinitions {
     @Then("^the response body should be \"([^\"]*)\"$")
     public void the_response_body_should_be(String expectedBody) throws Throwable {
         Assert.assertEquals(expectedBody, body());
+
     }
 
     /**
